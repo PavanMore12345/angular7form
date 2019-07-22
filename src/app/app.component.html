@@ -1,0 +1,92 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4" style="padding-top: 182px;">
+  
+<form>
+    <div class ="exmple">
+<mat-form-field>
+  <mat-label>Favorite food</mat-label>
+  <mat-select [(ngModel)] = "foodValue" name="food" (ngModelChange)="mySelectHandler($event)">
+    <mat-option *ngFor="let food of foods"    [value]="food.value">
+      {{food.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+</form>
+<form  *ngIf= "foodValue"  [formGroup]="userDetailsForm" (ngSubmit)="onSubmitUserDetails(userDetailsForm.value)">
+    <div class ="exmple">
+  <table>
+    <tr>
+      <div class ="exmple">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Full Name" [(ngModel)] = "fullname"  formControlName="fullname" required>
+        <mat-error *ngFor="let validation of validation_messages.fullname">
+          <mat-error class="error-message"
+            *ngIf="userDetailsForm.get('fullname').hasError(validation.type) && (userDetailsForm.get('fullname').dirty || userDetailsForm.get('fullname').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      </div>
+    </tr>
+    <tr>
+        <tr>
+           <div class ="exmple">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="user Name" [(ngModel)] = "username" formControlName="username" required>
+              <mat-error *ngFor="let validation of validation_messages.username">
+                <mat-error class="error-message"
+                  *ngIf="userDetailsForm.get('username').hasError(validation.type) && (userDetailsForm.get('username').dirty || userDetailsForm.get('username').touched)">
+                  {{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+            </div>
+          </tr>
+          <tr>
+              <div class ="exmple">
+      <mat-form-field class="full-width">
+        <input matInput type="email" [(ngModel)] = "email"  placeholder="Email" formControlName="email" required>
+        <mat-error *ngFor="let validation of validation_messages.email">
+          <mat-error class="error-message"
+            *ngIf="userDetailsForm.get('email').hasError(validation.type) && (userDetailsForm.get('email').dirty || userDetailsForm.get('email').touched)">
+            {{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+     </div>
+    </tr>
+    <tr>
+     <div class = "exmple">
+      <mat-form-field>
+        <mat-label>Select country</mat-label>
+        <mat-select [(ngModel)] = "countryName" formControlName="country" (ngModelChange)="selectedCountry($event)">
+          <mat-option *ngFor="let country of country_list"    [value]="country">
+            {{country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+     </div>
+    </tr>
+    <tr>
+      <div class ="exmple">
+       <mat-form-field class="full-width">
+         <input matInput placeholder="phone number" [(ngModel)] = "phoneNumber" formControlName="phone" required>
+         <mat-error *ngFor="let validation of validation_messages.phone">
+           <mat-error class="error-message"
+             *ngIf="userDetailsForm.get('phone').hasError(validation.type) && (userDetailsForm.get('phone').dirty || userDetailsForm.get('phone').touched)">
+             {{validation.message}}</mat-error>
+         </mat-error>
+       </mat-form-field>
+       </div>
+     </tr>
+    
+  </table>
+  <button class="submit-btn" color="primary" mat-raised-button type="submit"
+    [disabled]="!userDetailsForm.valid">Submit</button>
+    </div>
+</form>
+</div>
+<div class="col-sm-4"></div>
+</div>
+<router-outlet></router-outlet>

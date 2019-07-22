@@ -1,0 +1,9 @@
+.exmple> * {
+    width: 100%;
+  }
+  .exmple 
+    {
+        display: flex;
+        flex-direction: column;
+      }
+  
